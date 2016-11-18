@@ -1,50 +1,83 @@
-angular.module('starter.services', [])
+angular.module('skynet.services', [])
 
-.factory('Chats', function() {
-  // Might use a resource here that returns a JSON array
+  .factory('SkynetService', function($localStorage) {
+    $localStorage = $localStorage.$default({
+      ip: null,
+      port: null,
+      lastSetAt: null
+    });
 
-  // Some fake testing data
-  var chats = [{
-    id: 0,
-    name: 'Ben Sparrow',
-    lastText: 'You on your way?',
-    face: 'img/ben.png'
-  }, {
-    id: 1,
-    name: 'Max Lynx',
-    lastText: 'Hey, it\'s me',
-    face: 'img/max.png'
-  }, {
-    id: 2,
-    name: 'Adam Bradleyson',
-    lastText: 'I should buy a boat',
-    face: 'img/adam.jpg'
-  }, {
-    id: 3,
-    name: 'Perry Governor',
-    lastText: 'Look at my mukluks!',
-    face: 'img/perry.png'
-  }, {
-    id: 4,
-    name: 'Mike Harrington',
-    lastText: 'This is wicked good ice cream.',
-    face: 'img/mike.png'
-  }];
+    var _getIp = function() {
+      return $localStorage.ip;
+    };
 
-  return {
-    all: function() {
-      return chats;
-    },
-    remove: function(chat) {
-      chats.splice(chats.indexOf(chat), 1);
-    },
-    get: function(chatId) {
-      for (var i = 0; i < chats.length; i++) {
-        if (chats[i].id === parseInt(chatId)) {
-          return chats[i];
+    var _getPort = function() {
+      return $localStorage.port;
+    };
+
+    var _getLastSetAt = function() {
+      return $localStorage.lastSetAt;
+    };
+
+    var _getAll = function () {
+      return {
+        ip: _getIp(),
+        port: _getPort(),
+        lastSetAt: _getLastSetAt()
+      }
+    };
+
+    var _setIp = function(value) {
+      $localStorage.ip = value;
+    };
+
+    var _setPort = function(value) {
+      $localStorage.port = value;
+    };
+
+    var _setLastSetAt = function(value) {
+      $localStorage.lastSetAt = value;
+    };
+
+    var _setAll = function(value) {
+      _setIp(value.ip);
+      _setPort(value.port);
+      _setLastSetAt(value.lastSetAt);
+    };
+
+    var _getDateTimeFormat = function() {
+      return 'YYYY-MM-DD HH:mm:ss';
+    };
+
+    // If the IP and port were set more than 2 hours ago we will return null, which means it has to be set again
+    var _getFullRobotAddress = function() {
+      if (_getLastSetAt()) {
+        var lastSetAtMoment = moment(_getLastSetAt(), _getDateTimeFormat());
+        var hoursSinceLastSet = moment.duration(moment().diff(lastSetAtMoment)).asHours();
+
+        if (hoursSinceLastSet <= 2) {
+          return _getIp() + ':' + _getPort();
         }
       }
       return null;
+    };
+
+    var _isIpStillValid = function() {
+      return _getFullRobotAddress() != null;
+    };
+
+    return {
+      getIp: _getIp,
+      getPort: _getPort,
+      getLastSetAt: _getLastSetAt,
+      getAll: _getAll,
+
+      setIp: _setIp,
+      setPort: _setPort,
+      setLastSetAt: _setLastSetAt,
+      setAll: _setAll,
+
+      getDateTimeFormat: _getDateTimeFormat,
+      getFullRobotAddress: _getFullRobotAddress
     }
-  };
-});
+  });

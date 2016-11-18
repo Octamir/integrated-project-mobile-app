@@ -26,6 +26,12 @@
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
+    <!-- local storage for Ionic -->
+    <script src="lib/ngstorage/ngStorage.js"></script>
+
+    <!-- moment.js -->
+    <script src="lib/moment/moment.js"></script>
+
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
@@ -34,14 +40,23 @@
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
   </head>
-  <body ng-app="starter">
+  <body ng-app="skynet">
     <!--
       The nav bar that will be updated as we navigate between views.
     -->
+
     <ion-nav-bar class="bar-stable">
-      <ion-nav-back-button>
-      </ion-nav-back-button>
+      <ion-nav-title>Skynet</ion-nav-title>
+      <ion-nav-back-button></ion-nav-back-button>
     </ion-nav-bar>
+
+
+    <!--
+    <ion-header-bar class="bar-stable">
+      <h1>Skynet</h1>
+    </ion-header-bar>
+    -->
+
     <!--
       The views will be rendered in the <ion-nav-view> directive below
       Templates are in the /templates folder (but you could also
