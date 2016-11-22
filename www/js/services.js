@@ -78,6 +78,7 @@ angular.module('skynet.services', [])
       setAll: _setAll,
 
       getDateTimeFormat: _getDateTimeFormat,
-      getFullRobotAddress: _getFullRobotAddress
+      getFullRobotAddress: _getFullRobotAddress,
+      isIpStillValid: _isIpStillValid
     }
   });
