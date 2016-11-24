@@ -19,8 +19,24 @@ angular.module('skynet', ['ionic', 'skynet.controllers', 'skynet.services', 'ui.
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('ip', {
-        url: '/ip',
-        templateUrl: 'templates/skynet-ip.html'
+        url: "/ip",
+
+        views: {
+          'ip': {
+            templateUrl: "templates/skynet-ip.html",
+            controller: 'IPController'
+          }
+        }
+      })
+      .state('home', {
+        url: "/home",
+
+        views: {
+          'home': {
+            templateUrl: "templates/skynet-home.html",
+            controller: 'HomeController'
+          }
+        }
       });
     $urlRouterProvider.otherwise('/ip');
   });
