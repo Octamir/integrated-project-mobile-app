@@ -32,6 +32,12 @@ angular.module('skynet.controllers', [])
   }
 })
 
-.controller('HomeController', function($scope){
+.controller('HomeController', function($scope, SkynetService){
   $scope.testText = 'Welcome home';
+
+  $scope.testFunc = function() {
+    SkynetService.createAjaxCall('get-name',function(data){
+      console.log(data);
+    },null)
+  }
 });

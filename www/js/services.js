@@ -1,7 +1,10 @@
 angular.module('skynet.services', [])
 
-    .factory('SkynetService', function ($localStorage) {
-        $localStorage = $localStorage.$default({
+    .factory('SkynetService', function ($localStorage, $http) {
+
+      var _webserviceIP = 'http://127.0.0.1:3000/';
+
+      $localStorage = $localStorage.$default({
             ip: null,
             port: null,
             lastSetAt: null
@@ -72,6 +75,14 @@ angular.module('skynet.services', [])
             _setLastSetAt(null);
         };
 
+        var _createAjaxCall = function (route, succes, error) {
+            var fullAddress = _getFullRobotAddress();
+            if(fullAddress)
+              $http.get(_webserviceIP + fullAddress + '/' + route).then(succes, error);
+            else
+              console.log('ERROR');
+        };
+
         return {
             getIp: _getIp,
             getPort: _getPort,
@@ -86,6 +97,8 @@ angular.module('skynet.services', [])
             getDateTimeFormat: _getDateTimeFormat,
             getFullRobotAddress: _getFullRobotAddress,
             isIpStillValid: _isIpStillValid,
-            clearAll: _clearAll
+            clearAll: _clearAll,
+
+            createAjaxCall: _createAjaxCall
         }
     });
