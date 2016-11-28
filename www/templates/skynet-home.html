@@ -1,18 +1,6 @@
-<ion-side-menus>
-  <ion-side-menu-content>
-    <ion-header-bar class="bar-header">
-      <button class="button button-icon icon ion-navicon" menu-toggle="left"> </button>
-      <div class="h1 title">Skynet</div>
-
-    </ion-header-bar>
-    <ion-content>
-      <h1>NO COMPRENDO</h1>
-    </ion-content>
-  </ion-side-menu-content>
-
-  <ion-side-menu side="left">
-    <a menu-close href="#/home" class="item">Home</a>
-    <a menu-close href="#/home" class="item">Home</a>
-    <a menu-close href="#/home" class="item">Home</a>
-  </ion-side-menu>
-</ion-side-menus>
+<ion-view>
+  <!-- If ion-content is declared outside of the view, the iOS version breaks -->
+  <ion-content ng-controller="HomeController">
+    {{ testText }}
+  </ion-content>
+</ion-view>

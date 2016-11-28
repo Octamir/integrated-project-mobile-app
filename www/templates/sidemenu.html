@@ -1,0 +1,22 @@
+<ion-side-menus>
+    <ion-side-menu-content>
+        <ion-header-bar class="bar-header">
+            <button class="button button-icon icon ion-navicon" menu-toggle="left"> </button>
+            <div class="h1 title">Skynet</div>
+        </ion-header-bar>
+
+        <!-- Current state's content will show up here unless it's IP state -->
+        <ion-nav-view></ion-nav-view>
+
+    </ion-side-menu-content>
+
+    <ion-side-menu side="left" ng-controller="SideMenuController">
+        <!--
+        <a menu-close href="#/home" class="item">Home</a>
+        <a menu-close href="#/home" class="item">Home</a>
+        <a menu-close href="#/home" class="item">Home</a>
+        -->
+        <div menu-close ng-click="" class="item">Home</div>
+        <div menu-close ng-click="signOut()" class="item">Sign out</div>
+    </ion-side-menu>
+</ion-side-menus>

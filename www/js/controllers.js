@@ -1,5 +1,17 @@
 angular.module('skynet.controllers', [])
 
+    .controller('SideMenuController', function($scope, $state, SkynetService) {
+      // Simple function to enable side menu items to change the current state
+        $scope.goTo = function(state) {
+          $state.go(state);
+        };
+
+      $scope.signOut = function() {
+        SkynetService.clearAll();
+        $state.go('ip');
+      }
+    })
+
 .controller('IPController', function($scope, SkynetService, $state) {
   // https://www.safaribooksonline.com/library/view/regular-expressions-cookbook/9780596802837/ch07s16.html
   $scope.ipRegex = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
@@ -21,5 +33,5 @@ angular.module('skynet.controllers', [])
 })
 
 .controller('HomeController', function($scope){
-
+  $scope.testText = 'Welcome home';
 });
