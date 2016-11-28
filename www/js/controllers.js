@@ -1,6 +1,6 @@
 angular.module('skynet.controllers', [])
 
-.controller('IPController', function($scope, SkynetService) {
+.controller('IPController', function($scope, SkynetService, $state) {
   // https://www.safaribooksonline.com/library/view/regular-expressions-cookbook/9780596802837/ch07s16.html
   $scope.ipRegex = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
 
@@ -16,5 +16,10 @@ angular.module('skynet.controllers', [])
       port: $scope.port,
       lastSetAt: moment().format(SkynetService.getDateTimeFormat())
     });
+    $state.go('home');
   }
+})
+
+.controller('HomeController', function($scope){
+
 });
