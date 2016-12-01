@@ -5,7 +5,7 @@
   <ion-content ng-controller="IPController">
 
     <!-- novalidate = don't use HTML5 validation -->
-    <form name="ipForm" ng-submit="addIpAndPort()" novalidate>
+    <form name="ipForm" ng-submit="addIpAndPort()" ng-show="showForm" novalidate>
       <div class="list">
         <label class="item item-input">
           <input type="text" ng-model="ip" ng-pattern="ipRegex" placeholder="IP" required/>
@@ -21,5 +21,7 @@
         <button type="submit" ng-disabled="ipForm.$invalid" class="button button-block button-positive">Continue</button>
       </div>
     </form>
+
+    <ion-spinner ng-show="!showForm" icon="lines" class="spinner-positive"></ion-spinner>
   </ion-content>
 </ion-view>

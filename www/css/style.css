@@ -1,5 +1,6 @@
 /* Empty. Add your own CSS if you like */
 
-/*input{
-  background-color: lightgray;
-}*/
+.spinner svg {
+  width: 99%;
+  height: 99%;
+}
