@@ -12,11 +12,10 @@ angular.module('skynet.controllers', [])
       }
     })
 
-.controller('IPController', function($scope, $rootScope, $state, SkynetService, RobotService) {
+.controller('IPController', function($scope, $rootScope, $state, $ionicPopup, SkynetService, RobotService) {
   // https://www.safaribooksonline.com/library/view/regular-expressions-cookbook/9780596802837/ch07s16.html
   $scope.ipRegex = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
   $scope.showForm = true;
-  $scope.showCannotConnectError = false;
 
   // If we're reloading the app while the IP is still valid, it will be immediatly shown in the form
   if (SkynetService.isIpStillValid()) {
@@ -32,12 +31,14 @@ angular.module('skynet.controllers', [])
     });
 
     $scope.showForm = false;
-    $scope.showCannotConnectError = false;
 
     var connectionErrorFunct =  () => {
-      console.log('Error, could not get type');
-      $scope.showCannotConnectError = true;
       $scope.showForm = true;
+
+      var alertPopup = $ionicPopup.alert({
+        title: 'Error',
+        template: 'Could not connect'
+      });
     };
 
     SkynetService.createAjaxCall('get-type', (data) => {
