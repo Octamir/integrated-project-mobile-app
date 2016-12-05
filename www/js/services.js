@@ -1,6 +1,6 @@
 angular.module('skynet.services', [])
 
-  .factory('SkynetService', function ($localStorage, $http) {
+  .factory('SkynetService', function ($localStorage, $http, $ionicPopup) {
 
     var _webserviceIP = 'http://127.0.0.1:3000/';
 
@@ -84,6 +84,13 @@ angular.module('skynet.services', [])
       }
     };
 
+    var _showCannotConnectError = function() {
+      $ionicPopup.alert({
+        title: 'Error',
+        template: 'Could not connect'
+      });
+    };
+
     return {
       getIp: _getIp,
       getPort: _getPort,
@@ -100,7 +107,9 @@ angular.module('skynet.services', [])
       isIpStillValid: _isIpStillValid,
       clearAll: _clearAll,
 
-      createAjaxCall: _createAjaxCall
+      createAjaxCall: _createAjaxCall,
+
+      showCannotConnectError: _showCannotConnectError
     }
   })
 

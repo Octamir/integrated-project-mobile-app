@@ -12,7 +12,7 @@ angular.module('skynet.controllers', [])
       }
     })
 
-.controller('IPController', function($scope, $rootScope, $state, $ionicPopup, SkynetService, RobotService) {
+.controller('IPController', function($scope, $rootScope, $state, SkynetService, RobotService) {
   // https://www.safaribooksonline.com/library/view/regular-expressions-cookbook/9780596802837/ch07s16.html
   $scope.ipRegex = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
   $scope.showForm = true;
@@ -32,14 +32,7 @@ angular.module('skynet.controllers', [])
 
     $rootScope.showLoading = true;
 
-    var connectionErrorFunct =  () => {
-      $ionicPopup.alert({
-        title: 'Error',
-        template: 'Could not connect'
-      });
-    };
-
-    SkynetService.createAjaxCall('get-type', (data) => {
+    SkynetService.createAjaxCall('get-type', function(data) {
       var gotGoodType = true;
       switch(data.data.type.toLowerCase()) {
         case 'nao':
@@ -47,14 +40,18 @@ angular.module('skynet.controllers', [])
               break;
         default:
               gotGoodType = false;
-              connectionErrorFunct();
+              SkynetService.showCannotConnectError();
       }
+
       $rootScope.showLoading = false;
 
       if (gotGoodType) {
         $state.go('home');
       }
-    }, connectionErrorFunct);
+    }, function() {
+      $rootScope.showLoading = false;
+      SkynetService.showCannotConnectError();
+    });
   }
 })
 

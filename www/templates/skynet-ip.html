@@ -3,7 +3,6 @@
     <ion-nav-title>Skynet</ion-nav-title>
   </ion-nav-bar>
   <ion-content ng-controller="IPController">
-
     <!-- novalidate = don't use HTML5 validation -->
     <form name="ipForm" ng-submit="addIpAndPort()" ng-show="showForm" novalidate>
       <div class="list">
@@ -21,7 +20,5 @@
         <button type="submit" ng-disabled="ipForm.$invalid" class="button button-block button-positive">Continue</button>
       </div>
     </form>
-
-
   </ion-content>
 </ion-view>
