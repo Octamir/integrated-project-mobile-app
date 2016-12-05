@@ -30,12 +30,10 @@ angular.module('skynet.controllers', [])
       lastSetAt: moment().format(SkynetService.getDateTimeFormat())
     });
 
-    $scope.showForm = false;
+    $rootScope.showLoading = true;
 
     var connectionErrorFunct =  () => {
-      $scope.showForm = true;
-
-      var alertPopup = $ionicPopup.alert({
+      $ionicPopup.alert({
         title: 'Error',
         template: 'Could not connect'
       });
@@ -51,6 +49,7 @@ angular.module('skynet.controllers', [])
               gotGoodType = false;
               connectionErrorFunct();
       }
+      $rootScope.showLoading = false;
 
       if (gotGoodType) {
         $state.go('home');

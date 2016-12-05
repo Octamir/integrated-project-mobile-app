@@ -41,14 +41,20 @@
     <script src="js/services.js"></script>
 </head>
 <body ng-app="skynet">
-    <!-- showMenu is part of the $rootScope and is set in app.js (app.run) -->
-    <!-- In sidemenu.html the ion-nav-view is declared so both the menu and the state's template will be rendered -->
-    <!-- This is done to maximize reusability of the menu while not showing a menu for IP -->
-    <div ng-if="showMenu" ng-include="'templates/sidemenu.html'"></div>
+    <ion-content ng-show="showLoading">
+      <ion-spinner icon="lines" class="spinner-positive"></ion-spinner>
+    </ion-content>
 
-    <!-- Will only show up if the current state is IP -->
-    <div ng-if="!showMenu">
+    <div ng-show="!showLoading">
+      <!-- showMenu is part of the $rootScope and is set in app.js (app.run) -->
+      <!-- In sidemenu.html the ion-nav-view is declared so both the menu and the state's template will be rendered -->
+      <!-- This is done to maximize reusability of the menu while not showing a menu for IP -->
+      <div ng-if="showMenu" ng-include="'templates/sidemenu.html'"></div>
+
+      <!-- Will only show up if the current state is IP -->
+      <div ng-if="!showMenu">
         <ion-nav-view></ion-nav-view>
+      </div>
     </div>
 </body>
 </html>

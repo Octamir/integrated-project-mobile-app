@@ -17,6 +17,8 @@ angular.module('skynet', ['ionic', 'skynet.controllers', 'skynet.services', 'ui.
     })
 
     .run(function ($rootScope, $location) {
+        $rootScope.showLoading = false;
+
         $rootScope.$on('$stateChangeSuccess', function() {
             $rootScope.showMenu = $location.path() !== "/ip";
         });
