@@ -133,11 +133,33 @@ angular.module('skynet.services', [])
       }
     }
 
-    class Nao extends Robot {
+    class MoveableRobot {
+
+      move(x, y, d) {
+        console.log('The general move method is not implemented');
+      }
+    }
+
+    class Nao extends MoveableRobot {
       // Nao specific methods should go here
     }
 
+    class Pepper extends MoveableRobot {
+      // Pepper specific methods should go here
+    }
+
+    class Jibo extends Robot {
+      // Jibo specific methods should go here
+    }
+
+    class Buddy extends Robot {
+      // Buddy specific methods should go here
+    }
+
     return {
-      Nao: Nao
+      Nao: Nao,
+      Pepper: Pepper,
+      Jibo: Jibo,
+      Buddy: Buddy
     }
   });

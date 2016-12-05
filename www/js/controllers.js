@@ -38,6 +38,15 @@ angular.module('skynet.controllers', [])
         case 'nao':
               $rootScope.robot = new RobotService.Nao();
               break;
+        case 'pepper':
+              $rootScope.robot = new RobotService.Pepper();
+              break;
+        case 'jibo':
+              $rootScope.robot = new RobotService.Jibo();
+              break;
+        case 'buddy':
+              $rootScope.robot = new RobotService.Buddy();
+              break;
         default:
               gotGoodType = false;
               SkynetService.showCannotConnectError();
