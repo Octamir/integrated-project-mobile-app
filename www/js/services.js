@@ -1,165 +1,192 @@
 angular.module('skynet.services', [])
 
-  .factory('SkynetService', function ($localStorage, $http, $ionicPopup) {
-
-    var _webserviceIP = 'http://127.0.0.1:3000/';
+.factory('SkynetService', ($localStorage, $http, $ionicPopup) => {
+    const _webserviceIP = 'http://127.0.0.1:3000/';
 
     $localStorage = $localStorage.$default({
-      ip: null,
-      port: null,
-      lastSetAt: null
+        ip: null,
+        port: null,
+        lastSetAt: null
     });
 
-    var _getIp = function () {
-      return $localStorage.ip;
+    const _getIp = () => {
+        return $localStorage.ip;
     };
 
-    var _getPort = function () {
-      return $localStorage.port;
+    const _getPort = () => {
+        return $localStorage.port;
     };
 
-    var _getLastSetAt = function () {
-      return $localStorage.lastSetAt;
+    const _getLastSetAt = () => {
+        return $localStorage.lastSetAt;
     };
 
-    var _getAll = function () {
-      return {
-        ip: _getIp(),
-        port: _getPort(),
-        lastSetAt: _getLastSetAt()
-      }
+    const _getAll = () => {
+        return {
+            ip: _getIp(),
+            port: _getPort(),
+            lastSetAt: _getLastSetAt()
+        }
     };
 
-    var _setIp = function (value) {
-      $localStorage.ip = value;
+    const _setIp = (value) => {
+        $localStorage.ip = value;
     };
 
-    var _setPort = function (value) {
-      $localStorage.port = value;
+    const _setPort = (value) => {
+        $localStorage.port = value;
     };
 
-    var _setLastSetAt = function (value) {
-      $localStorage.lastSetAt = value;
+    const _setLastSetAt = (value) => {
+        $localStorage.lastSetAt = value;
     };
 
-    var _setAll = function (value) {
-      _setIp(value.ip);
-      _setPort(value.port);
-      _setLastSetAt(value.lastSetAt);
+    const _setAll = (value) => {
+        _setIp(value.ip);
+        _setPort(value.port);
+        _setLastSetAt(value.lastSetAt);
     };
 
-    var _getDateTimeFormat = function () {
-      return 'YYYY-MM-DD HH:mm:ss';
+    const _getDateTimeFormat = () => {
+        return 'YYYY-MM-DD HH:mm:ss';
     };
 
     // If the IP and port were set more than 2 hours ago we will return null, which means it has to be set again
-    var _getFullRobotAddress = function () {
-      if (_getLastSetAt()) {
-        var lastSetAtMoment = moment(_getLastSetAt(), _getDateTimeFormat());
-        var hoursSinceLastSet = moment.duration(moment().diff(lastSetAtMoment)).asHours();
+    const _getFullRobotAddress = () => {
+        if (_getLastSetAt()) {
+            var lastSetAtMoment = moment(_getLastSetAt(), _getDateTimeFormat());
+            var hoursSinceLastSet = moment.duration(moment().diff(lastSetAtMoment)).asHours();
 
-        if (hoursSinceLastSet <= 2) {
-          return _getIp() + ':' + _getPort();
+            if (hoursSinceLastSet <= 2) {
+                return _getIp() + ':' + _getPort();
+            }
         }
-      }
-      return null;
+        return null;
     };
 
-    var _isIpStillValid = function () {
-      return _getFullRobotAddress() != null;
+    const _isIpStillValid = () => {
+        return _getFullRobotAddress() != null;
     };
 
-    var _clearAll = function () {
-      _setIp(null);
-      _setPort(null);
-      _setLastSetAt(null);
+    const _clearAll = () => {
+        _setIp(null);
+        _setPort(null);
+        _setLastSetAt(null);
     };
 
-    var _createAjaxCall = function (route, succes, error) {
-      var fullAddress = _getFullRobotAddress();
-      if (fullAddress) {
-        $http.get(_webserviceIP + fullAddress + '/' + route).then(succes, error);
-      } else {
-        error();
-      }
+    const _createAjaxCall = (route, succes, error) => {
+        var fullAddress = _getFullRobotAddress();
+        if (fullAddress) {
+            $http.get(_webserviceIP + fullAddress + '/' + route).then(succes, error);
+        } else {
+            error();
+        }
     };
 
-    var _showCannotConnectError = function() {
-      $ionicPopup.alert({
-        title: 'Error',
-        template: 'Could not connect'
-      });
+    const _showCannotConnectError = () => {
+        $ionicPopup.alert({
+            title: 'Error',
+            template: 'Could not connect'
+        });
     };
 
     return {
-      getIp: _getIp,
-      getPort: _getPort,
-      getLastSetAt: _getLastSetAt,
-      getAll: _getAll,
+        getIp: _getIp,
+        getPort: _getPort,
+        getLastSetAt: _getLastSetAt,
+        getAll: _getAll,
 
-      setIp: _setIp,
-      setPort: _setPort,
-      setLastSetAt: _setLastSetAt,
-      setAll: _setAll,
+        setIp: _setIp,
+        setPort: _setPort,
+        setLastSetAt: _setLastSetAt,
+        setAll: _setAll,
 
-      getDateTimeFormat: _getDateTimeFormat,
-      getFullRobotAddress: _getFullRobotAddress,
-      isIpStillValid: _isIpStillValid,
-      clearAll: _clearAll,
+        getDateTimeFormat: _getDateTimeFormat,
+        getFullRobotAddress: _getFullRobotAddress,
+        isIpStillValid: _isIpStillValid,
+        clearAll: _clearAll,
 
-      createAjaxCall: _createAjaxCall,
+        createAjaxCall: _createAjaxCall,
 
-      showCannotConnectError: _showCannotConnectError
+        showCannotConnectError: _showCannotConnectError
     }
-  })
+})
 
-  .factory('RobotService', function (SkynetService) {
+.factory('RobotService', (SkynetService) => {
     class Robot {
-      constructor() {
-        this.getName();
-        this.getBatteryLevel();
-      }
+        constructor() {
+            this.canTalk = true;
+            this.hasCamera = true;
 
-      getName() {
-        SkynetService.createAjaxCall('get-name', (data) => {
-          this.name = data.data.name;
-        }, () => console.log('Error, could not get name'))
-      }
+            this.getName();
+            this.getBatteryLevel();
+        }
 
-      getBatteryLevel() {
-        SkynetService.createAjaxCall('get-battery', (data) => {
-          this.batteryLevel = data.data.level;
-        }, () => console.log('Error, could not get name'))
-      }
+        getName() {
+            SkynetService.createAjaxCall('get-name', (data) => {
+                this.name = data.data.name;
+            }, () => console.log('Error, could not get name'))
+        }
+
+        getBatteryLevel() {
+            SkynetService.createAjaxCall('get-battery', (data) => {
+                this.batteryLevel = data.data.level;
+            }, () => console.log('Error, could not get name'))
+        }
     }
 
-    class MoveableRobot {
+    class MoveableRobot extends Robot {
+        constructor() {
+            super();
 
-      move(x, y, d) {
-        console.log('The general move method is not implemented');
-      }
+            this.canMove = true;
+        }
+
+        move(x, y, d) {
+            console.log('The general move method is not implemented');
+        }
     }
 
     class Nao extends MoveableRobot {
-      // Nao specific methods should go here
+        constructor() {
+            super();
+
+            this.canWalk = true;
+        }
     }
 
     class Pepper extends MoveableRobot {
-      // Pepper specific methods should go here
+        constructor() {
+            super();
+
+            this.canRide = true;
+            this.hasTablet = true;
+            this.canGuessAge = true;
+            this.canRide = true;
+        }
     }
 
     class Jibo extends Robot {
-      // Jibo specific methods should go here
+        constructor() {
+            super();
+
+            this.canMoveHead = true;
+            this.hasDisplay = true;
+        }
     }
 
     class Buddy extends Robot {
-      // Buddy specific methods should go here
+        constructor() {
+            super();
+        }
     }
 
+    // ES syntax
+    // This will get compiled to Nao: Nao, etc.
     return {
-      Nao: Nao,
-      Pepper: Pepper,
-      Jibo: Jibo,
-      Buddy: Buddy
+        Nao,
+        Pepper,
+        Jibo,
+        Buddy
     }
-  });
+});
