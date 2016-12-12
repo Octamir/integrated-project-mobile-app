@@ -1,6 +1,45 @@
 <ion-view>
   <!-- If ion-content is declared outside of the view, the iOS version breaks -->
   <ion-content ng-controller="HomeController">
-
+    <table>
+      <tr>
+        <td>Action</td>
+        <td>Start</td>
+      </tr>
+      <tr>
+        <td>Stand</td>
+        <td><button class="ion-play" ng-click="stand()"></button></td>
+      </tr>
+      <tr>
+        <td>StandInit</td>
+        <td><button class="ion-play" ng-click="standInit()"></button></td>
+      </tr>
+      <tr>
+        <td>StandZero</td>
+        <td><button class="ion-play" ng-click="standZero()"></button></td>
+      </tr>
+      <tr>
+        <td>Sit</td>
+        <td><button class="ion-play" ng-click="sit()"></button></td>
+      </tr>
+      <tr>
+        <td>SitRelax</td>
+        <td><button class="ion-play" ng-click="sitRelax()"></button></td>
+      </tr>
+      <tr>
+        <td>Crouch</td>
+        <td><button class="ion-play" ng-click="crouch()"></button></td>
+      </tr>
+      <tr>
+        <td>LyingBelly</td>
+        <td><button class="ion-play" ng-click="lyingBelly()"></button></td>
+      </tr>
+      <tr>
+        <td>LyingBack</td>
+        <td><button class="ion-play" ng-click="lyingBack()"></button></td>
+      </tr>
+    </table>
   </ion-content>
 </ion-view>
+
+
