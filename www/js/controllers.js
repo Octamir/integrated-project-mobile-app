@@ -66,28 +66,28 @@ angular.module('skynet.controllers', [])
 
 .controller('HomeController', ($scope, SkynetService, RobotService) => {
   $scope.sit =() => {
-    SkynetService.createAjaxCall("actions/Sit",() => console.log("succes"), () => console.log("error"))
+    SkynetService.createAjaxCall("actions/sit",() => console.log("succes"), () => console.log("error"))
   }
   $scope.stand =() => {
-    SkynetService.createAjaxCall("actions/Stand",() => console.log("succes"), () => console.log("error"))
+    SkynetService.createAjaxCall("actions/stand",() => console.log("succes"), () => console.log("error"))
   }
 
   $scope.standZero =() => {
-    SkynetService.createAjaxCall("actions/StandZero",() => console.log("succes"), () => console.log("error"))
+    SkynetService.createAjaxCall("actions/stand-zero",() => console.log("succes"), () => console.log("error"))
   }
   $scope.standInit =() => {
-    SkynetService.createAjaxCall("actions/StandInit",() => console.log("succes"), () => console.log("error"))
+    SkynetService.createAjaxCall("actions/stand-init",() => console.log("succes"), () => console.log("error"))
   }
   $scope.sitRelax =() => {
-    SkynetService.createAjaxCall("actions/SitRelax",() => console.log("succes"), () => console.log("error"))
+    SkynetService.createAjaxCall("actions/sit-relax",() => console.log("succes"), () => console.log("error"))
   }
   $scope.crouch =() => {
-    SkynetService.createAjaxCall("actions/Crouch",() => console.log("succes"), () => console.log("error"))
+    SkynetService.createAjaxCall("actions/crouch",() => console.log("succes"), () => console.log("error"))
   }
   $scope.lyingBelly =() => {
-    SkynetService.createAjaxCall("actions/LyingBelly",() => console.log("succes"), () => console.log("error"))
+    SkynetService.createAjaxCall("actions/lying-belly",() => console.log("succes"), () => console.log("error"))
   }
   $scope.lyingBack =() => {
-    SkynetService.createAjaxCall("actions/LyingBack",() => console.log("succes"), () => console.log("error"))
+    SkynetService.createAjaxCall("actions/lying-back",() => console.log("succes"), () => console.log("error"))
   }
 });
