@@ -189,6 +189,10 @@ angular.module('skynet.services', [])
             super();
 
             this.canWalk = true;
+            this.canSit = true;
+            this.canStand = true;
+            this.canLie = true;
+            this.canCrouch = true;
         }
     }
 

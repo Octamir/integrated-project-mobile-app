@@ -1,6 +1,45 @@
 <ion-view>
   <!-- If ion-content is declared outside of the view, the iOS version breaks -->
   <ion-content ng-controller="HomeController">
-
+    <table>
+      <tr>
+        <td>Action</td>
+        <td>Start</td>
+      </tr>
+      <tr ng-show="robot.canStand">
+        <td class="vertically-aligned">Stand</td>
+        <td><button class="ion-play button button-positive button-small" ng-click="stand()"></button></td>
+      </tr>
+      <tr ng-show="robot.canStand">
+        <td class="vertically-aligned">StandInit</td>
+        <td><button class="ion-play button button-positive button-small" ng-click="standInit()"></button></td>
+      </tr>
+      <tr ng-show="robot.canStand">
+        <td class="vertically-aligned">StandZero</td>
+        <td><button class="ion-play button button-positive button-small" ng-click="standZero()"></button></td>
+      </tr>
+      <tr ng-show="robot.canSit">
+        <td class="vertically-aligned">Sit</td>
+        <td><button class="ion-play button button-positive button-small" ng-click="sit()"></button></td>
+      </tr>
+      <tr ng-show="robot.canSit">
+        <td class="vertically-aligned">SitRelax</td>
+        <td><button class="ion-play button button-positive button-small" ng-click="sitRelax()"></button></td>
+      </tr>
+      <tr ng-show="robot.canCrouch">
+        <td class="vertically-aligned">Crouch</td>
+        <td><button class="ion-play button button-positive button-small" ng-click="crouch()"></button></td>
+      </tr>
+      <tr ng-show="robot.canLie">
+        <td class="vertically-aligned">LyingBelly</td>
+        <td><button class="ion-play button button-positive button-small" ng-click="lyingBelly()"></button></td>
+      </tr>
+      <tr ng-show="robot.canLie">
+        <td class="vertically-aligned">LyingBack</td>
+        <td><button class="ion-play button button-positive button-small" ng-click="lyingBack()"></button></td>
+      </tr>
+    </table>
   </ion-content>
 </ion-view>
+
+
