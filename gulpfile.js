@@ -19,21 +19,36 @@ const paths = {
 gulp.task('default', ['beautify-js']);
 
 gulp.task('sass', (done) => {
-    gulp.src('./scss/ionic.app.scss')
+    gulp.src('./scss/skynet.scss')
         .pipe(sass())
         .on('error', sass.logError)
-        .pipe(gulp.dest('./www/css/'))
         .pipe(minifyCss({
             keepSpecialComments: 0
         }))
         .pipe(rename({extname: '.min.css'}))
+        .pipe(notify('Compiled <%= file.relative %>'))
         .pipe(gulp.dest('./www/css/'))
         .on('end', done);
 });
 
-gulp.task('watch', () => {
+gulp.task('compile-bundle', () => {
+    const destination = './www';
+    return gulp.src(paths.js)
+        .pipe(concat('bundle.js'))
+        .pipe(babel())
+        .pipe(notify('Compiled <%= file.relative %>'))
+        .pipe(gulp.dest(destination));
+});
+
+gulp.task('watch-js', ['compile-bundle'], () => {
+    return gulp.watch(paths.js, ['compile-bundle']);
+});
+
+gulp.task('watch-sass', ['sass'], () => {
     gulp.watch(paths.sass, ['sass']);
 });
+
+gulp.task('watch', ['watch-js', 'watch-sass']);
 
 gulp.task('install', ['git-check'], () => {
     return bower.commands.install()
@@ -60,18 +75,4 @@ gulp.task('beautify-js', () => {
     return gulp.src(paths.js)
         .pipe(beautify({indent_size: 4}))
         .pipe(gulp.dest(destination));
-});
-
-gulp.task('compile-bundle', () => {
-    const destination = './www';
-    return gulp.src(paths.js)
-        .pipe(concat('bundle.js'))
-        .pipe(babel())
-        .pipe(notify('Compiled <%= file.relative %>'))
-        .pipe(gulp.dest(destination));
-});
-
-const watchJsDependencies = ['compile-bundle'];
-gulp.task('watch-js', watchJsDependencies, () => {
-    return gulp.watch(paths.js, watchJsDependencies);
 });

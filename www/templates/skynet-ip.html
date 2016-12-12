@@ -4,7 +4,7 @@
   </ion-nav-bar>
   <ion-content ng-controller="IPController">
     <!-- novalidate = don't use HTML5 validation -->
-    <form name="ipForm" ng-submit="addIpAndPort()" ng-show="showForm" novalidate>
+    <form name="ipForm" ng-submit="connectFromForm()" ng-show="showForm" novalidate>
       <div class="list">
         <label class="item item-input">
           <input type="text" ng-model="ip" ng-pattern="ipRegex" placeholder="IP" required/>
@@ -20,5 +20,12 @@
         <button type="submit" ng-disabled="ipForm.$invalid" class="button button-block button-positive">Continue</button>
       </div>
     </form>
+
+    <div ng-hide="previousIps.length == 0">
+      <h3 class="title-positive text-center">Previous IPs</h3>
+      <div class="list">
+        <div class="item" ng-repeat="ip in previousIps | reverse track by $index" ng-click="connectFromList(ip)">{{ ip }}</div>
+      </div>
+    </div>
   </ion-content>
 </ion-view>

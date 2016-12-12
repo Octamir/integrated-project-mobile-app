@@ -21,3 +21,32 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+.spinner svg {
+  width: 99%;
+  height: 99%;
+}
+
+.title-positive {
+  color: $positive;
+}
+
+.skynet-list-positive * {
+  background-color: $positive;
+}
+
+table, th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+  margin: 5px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+
+.vertically-aligned {
+  vertical-align:middle
+}

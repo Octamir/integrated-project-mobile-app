@@ -1,12 +1,13 @@
 angular.module('skynet.services', [])
 
-.factory('SkynetService', ($localStorage, $http, $ionicPopup) => {
+.factory('SkynetService', ($rootScope, $localStorage, $http, $ionicPopup) => {
     const _webserviceIP = 'http://127.0.0.1:3000/';
 
     $localStorage = $localStorage.$default({
         ip: null,
         port: null,
-        lastSetAt: null
+        lastSetAt: null,
+        previousIps: []
     });
 
     const _getIp = () => {
@@ -21,11 +22,16 @@ angular.module('skynet.services', [])
         return $localStorage.lastSetAt;
     };
 
+    const _getPreviousIps = () => {
+        return $localStorage.previousIps;
+    };
+
     const _getAll = () => {
         return {
             ip: _getIp(),
             port: _getPort(),
-            lastSetAt: _getLastSetAt()
+            lastSetAt: _getLastSetAt(),
+            previousIps: _getPreviousIps()
         }
     };
 
@@ -45,6 +51,22 @@ angular.module('skynet.services', [])
         _setIp(value.ip);
         _setPort(value.port);
         _setLastSetAt(value.lastSetAt);
+    };
+
+    const _addPreviousIp = (ip) => {
+        let tmp = [..._getPreviousIps()];
+
+        if (tmp.indexOf(ip) == -1) {
+            tmp.push(ip);
+            if (tmp.length > 3) {
+                tmp.shift();
+            }
+            $localStorage.previousIps = tmp;
+        }
+    };
+
+    const _addCurrentIpAsPrevious = () => {
+        _addPreviousIp(_getFullRobotAddress());
     };
 
     const _getDateTimeFormat = () => {
@@ -74,12 +96,23 @@ angular.module('skynet.services', [])
         _setLastSetAt(null);
     };
 
-    const _createAjaxCall = (route, succes, error) => {
-        var fullAddress = _getFullRobotAddress();
+    const _createAjaxCall = (route, success, error) => {
+        const tmpSuccess = (data) => {
+            $rootScope.showLoading = false;
+            success(data);
+        };
+
+        const tmpError = (err) => {
+            $rootScope.showLoading = false;
+            error(err);
+        };
+
+        const fullAddress = _getFullRobotAddress();
         if (fullAddress) {
-            $http.get(_webserviceIP + fullAddress + '/' + route).then(succes, error);
+            $rootScope.showLoading = true;
+            $http.get(_webserviceIP + fullAddress + '/' + route).then(tmpSuccess, tmpError);
         } else {
-            error();
+            tmpError();
         }
     };
 
@@ -94,12 +127,16 @@ angular.module('skynet.services', [])
         getIp: _getIp,
         getPort: _getPort,
         getLastSetAt: _getLastSetAt,
+        getPreviousIps: _getPreviousIps,
         getAll: _getAll,
 
         setIp: _setIp,
         setPort: _setPort,
         setLastSetAt: _setLastSetAt,
         setAll: _setAll,
+
+        addPreviousIp: _addPreviousIp,
+        addCurrentIpAsPrevious: _addCurrentIpAsPrevious,
 
         getDateTimeFormat: _getDateTimeFormat,
         getFullRobotAddress: _getFullRobotAddress,

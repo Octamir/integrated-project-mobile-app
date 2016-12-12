@@ -24,6 +24,11 @@ angular.module('skynet', ['ionic', 'skynet.controllers', 'skynet.services', 'ui.
     });
 })
 
+//http://stackoverflow.com/questions/15266671/angular-ng-repeat-in-reverse
+.filter('reverse', function() {
+    return (items) => items.slice().reverse();
+})
+
 .config(($stateProvider, $urlRouterProvider) => {
     $stateProvider
         .state('ip', {

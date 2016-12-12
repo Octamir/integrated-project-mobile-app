@@ -17,21 +17,23 @@ angular.module('skynet.controllers', [])
     $scope.ipRegex = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
     $scope.showForm = true;
 
+    $scope.previousIps = SkynetService.getPreviousIps();
+
     // If we're reloading the app while the IP is still valid, it will be immediatly shown in the form
     if (SkynetService.isIpStillValid()) {
         $scope.ip = SkynetService.getIp();
         $scope.port = SkynetService.getPort();
     }
 
-    $scope.addIpAndPort = () => {
+    const setConnectionData = (ip, port) => {
         SkynetService.setAll({
-            ip: $scope.ip,
-            port: $scope.port,
+            ip: ip,
+            port: port,
             lastSetAt: moment().format(SkynetService.getDateTimeFormat())
         });
+    };
 
-        $rootScope.showLoading = true;
-
+    const connect = () => {
         SkynetService.createAjaxCall('get-type', (data) => {
             let gotGoodType = true;
             switch (data.data.type.toLowerCase()) {
@@ -52,16 +54,28 @@ angular.module('skynet.controllers', [])
                     SkynetService.showCannotConnectError();
             }
 
-            $rootScope.showLoading = false;
+            //$rootScope.showLoading = false;
 
             if (gotGoodType) {
+                SkynetService.addCurrentIpAsPrevious();
                 $state.go('home');
             }
         }, () => {
-            $rootScope.showLoading = false;
             SkynetService.showCannotConnectError();
         });
-    }
+    };
+
+    $scope.connectFromForm = () => {
+        setConnectionData($scope.ip, $scope.port);
+        connect();
+    };
+
+    $scope.connectFromList = (address) => {
+        const splitAddress = address.split(':');
+        setConnectionData(splitAddress[0], parseInt(splitAddress[1]));
+
+        connect();
+    };
 })
 
 .controller('HomeController', ($scope, SkynetService, RobotService) => {
