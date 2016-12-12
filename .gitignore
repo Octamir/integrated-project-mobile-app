@@ -1,5 +1,5 @@
 www/bundle.js
-css/skynet.min.css
+www/css/skynet.min.css
 
 # Specifies intentionally untracked files to ignore when using Git
 # http://git-scm.com/docs/gitignore
