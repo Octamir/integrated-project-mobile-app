@@ -79,29 +79,30 @@ angular.module('skynet.controllers', [])
 })
 
 .controller('HomeController', ($scope, SkynetService, RobotService) => {
-  $scope.sit =() => {
-    SkynetService.createAjaxCall("actions/sit",() => console.log("succes"), () => console.log("error"))
-  }
-  $scope.stand =() => {
-    SkynetService.createAjaxCall("actions/stand",() => console.log("succes"), () => console.log("error"))
-  }
+    $scope.sit = () => {
+        SkynetService.createAjaxCall("actions/sit", () => console.log("succes"), () => console.log("error"))
+    };
+    $scope.stand = () => {
+        SkynetService.createAjaxCall("actions/stand", () => console.log("succes"), () => console.log("error"))
+    };
 
-  $scope.standZero =() => {
-    SkynetService.createAjaxCall("actions/stand-zero",() => console.log("succes"), () => console.log("error"))
-  }
-  $scope.standInit =() => {
-    SkynetService.createAjaxCall("actions/stand-init",() => console.log("succes"), () => console.log("error"))
-  }
-  $scope.sitRelax =() => {
-    SkynetService.createAjaxCall("actions/sit-relax",() => console.log("succes"), () => console.log("error"))
-  }
-  $scope.crouch =() => {
-    SkynetService.createAjaxCall("actions/crouch",() => console.log("succes"), () => console.log("error"))
-  }
-  $scope.lyingBelly =() => {
-    SkynetService.createAjaxCall("actions/lying-belly",() => console.log("succes"), () => console.log("error"))
-  }
-  $scope.lyingBack =() => {
-    SkynetService.createAjaxCall("actions/lying-back",() => console.log("succes"), () => console.log("error"))
-  }
+    $scope.standZero = () => {
+        SkynetService.createAjaxCall("actions/stand-zero", () => console.log("succes"), () => console.log("error"))
+    };
+    $scope.standInit = () => {
+        SkynetService.createAjaxCall("actions/stand-init", () => console.log("succes"), () => console.log("error"))
+    };
+    $scope.sitRelax = () => {
+        SkynetService.createAjaxCall("actions/sit-relax", () => console.log("succes"), () => console.log("error"))
+    };
+    $scope.crouch = () => {
+        SkynetService.createAjaxCall("actions/crouch", () => console.log("succes"), () => console.log("error"))
+    };
+    $scope.lyingBelly = () => {
+        SkynetService.createAjaxCall("actions/lying-belly", () => console.log("succes"), () => console.log("error"))
+    };
+    $scope.lyingBack = () => {
+        SkynetService.createAjaxCall("actions/lying-back", () => console.log("succes"), () => console.log("error"))
+    };
+    $scope.ip = SkynetService.getIp();
 });
