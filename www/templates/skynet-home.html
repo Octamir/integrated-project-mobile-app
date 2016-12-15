@@ -6,38 +6,46 @@
         <td>Action</td>
         <td>Start</td>
       </tr>
-      <tr ng-show="robot.canStand">
+      <tr ng-show="robot.stand">
         <td class="vertically-aligned">Stand</td>
-        <td><button class="ion-play button button-positive button-small" ng-click="stand()"></button></td>
+        <td><button class="ion-play button button-positive button-small" ng-click="robot.stand()"></button></td>
       </tr>
-      <tr ng-show="robot.canStand">
+      <tr ng-show="robot.standInit">
         <td class="vertically-aligned">StandInit</td>
-        <td><button class="ion-play button button-positive button-small" ng-click="standInit()"></button></td>
+        <td><button class="ion-play button button-positive button-small" ng-click="robot.standInit()"></button></td>
       </tr>
-      <tr ng-show="robot.canStand">
+      <tr ng-show="robot.standZero">
         <td class="vertically-aligned">StandZero</td>
-        <td><button class="ion-play button button-positive button-small" ng-click="standZero()"></button></td>
+        <td><button class="ion-play button button-positive button-small" ng-click="robot.standZero()"></button></td>
       </tr>
-      <tr ng-show="robot.canSit">
+      <tr ng-show="robot.sit">
         <td class="vertically-aligned">Sit</td>
-        <td><button class="ion-play button button-positive button-small" ng-click="sit()"></button></td>
+        <td><button class="ion-play button button-positive button-small" ng-click="robot.sit()"></button></td>
       </tr>
-      <tr ng-show="robot.canSit">
+      <tr ng-show="robot.sitRelax">
         <td class="vertically-aligned">SitRelax</td>
-        <td><button class="ion-play button button-positive button-small" ng-click="sitRelax()"></button></td>
+        <td><button class="ion-play button button-positive button-small" ng-click="robot.sitRelax()"></button></td>
       </tr>
-      <tr ng-show="robot.canCrouch">
+      <tr ng-show="robot.crouch">
         <td class="vertically-aligned">Crouch</td>
-        <td><button class="ion-play button button-positive button-small" ng-click="crouch()"></button></td>
+        <td><button class="ion-play button button-positive button-small" ng-click="robot.crouch()"></button></td>
       </tr>
-      <tr ng-show="robot.canLie">
+      <tr ng-show="robot.lieBelly">
         <td class="vertically-aligned">LyingBelly</td>
-        <td><button class="ion-play button button-positive button-small" ng-click="lyingBelly()"></button></td>
+        <td><button class="ion-play button button-positive button-small" ng-click="robot.lieBelly()"></button></td>
       </tr>
-      <tr ng-show="robot.canLie">
+      <tr ng-show="robot.lieBack">
         <td class="vertically-aligned">LyingBack</td>
-        <td><button class="ion-play button button-positive button-small" ng-click="lyingBack()"></button></td>
+        <td><button class="ion-play button button-positive button-small" ng-click="robot.lieBack()"></button></td>
       </tr>
+    </table>
+    <table ng-show="robot.move">
+      <tr><td>Move</td></tr>
+      <tr><td><input class="item" type="number" min="0" ng-model="x" placeholder="X"></td></tr>
+      <tr><td><input class="item" type="number" min="0" ng-model="y" placeholder="Y"></td></tr>
+      <tr><td><input class="item" type="number" min="0" ng-model="d" placeholder="D"></td></tr>
+      <tr><td><button class="ion-play button button-block button-positive" ng-click="robot.move(x,y,d)"></button></td></tr>
+
     </table>
   </ion-content>
 </ion-view>

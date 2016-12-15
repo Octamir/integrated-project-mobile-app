@@ -180,7 +180,7 @@ angular.module('skynet.services', [])
         }
 
         move(x, y, d) {
-            console.log('The general move method is not implemented');
+          SkynetService.createAjaxCall(`move/${x}/${y}/${d}`,() => console.log("succes"), () => console.log("error"));
         }
     }
 
@@ -194,6 +194,32 @@ angular.module('skynet.services', [])
             this.canLie = true;
             this.canCrouch = true;
         }
+
+        stand(){
+          SkynetService.createAjaxCall("actions/stand",() => console.log("succes"), () => console.log("error"));
+        }
+        standZero(){
+          SkynetService.createAjaxCall("actions/stand-zero",() => console.log("succes"), () => console.log("error"));
+        }
+        standInit(){
+          SkynetService.createAjaxCall("actions/stand-init",() => console.log("succes"), () => console.log("error"));
+        }
+        sit(){
+          SkynetService.createAjaxCall("actions/sit",() => console.log("succes"), () => console.log("error"));
+        }
+        sitRelax(){
+          SkynetService.createAjaxCall("actions/sit-relax",() => console.log("succes"), () => console.log("error"));
+        }
+        crouch(){
+          SkynetService.createAjaxCall("actions/crouch",() => console.log("succes"), () => console.log("error"));
+        }
+        lieBelly(){
+          SkynetService.createAjaxCall("actions/lying-belly",() => console.log("succes"), () => console.log("error"));
+        }
+        lieBack(){
+          SkynetService.createAjaxCall("actions/lying-back",() => console.log("succes"), () => console.log("error"));
+        }
+
     }
 
     class Pepper extends MoveableRobot {
