@@ -16,7 +16,7 @@ const paths = {
     js: ['./www/js/**/*.js']
 };
 
-gulp.task('default', ['beautify-js']);
+gulp.task('default', ['watch']);
 
 gulp.task('sass', (done) => {
     gulp.src('./scss/skynet.scss')
