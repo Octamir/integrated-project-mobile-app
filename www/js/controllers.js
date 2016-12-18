@@ -80,4 +80,8 @@ angular.module('skynet.controllers', [])
 
 .controller('HomeController', ($scope, SkynetService, RobotService) => {
 
+})
+
+.controller('MoveController', ($scope) => {
+
 });

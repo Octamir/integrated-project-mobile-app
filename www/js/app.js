@@ -20,7 +20,7 @@ angular.module('skynet', ['ionic', 'skynet.controllers', 'skynet.services', 'ui.
     $rootScope.showLoading = false;
 
     $rootScope.$on('$stateChangeSuccess', () => {
-        $rootScope.showMenu = $location.path() !== "/ip";
+        $rootScope.showMenu = $location.path() !== '/ip';
     });
 })
 
@@ -29,15 +29,23 @@ angular.module('skynet', ['ionic', 'skynet.controllers', 'skynet.services', 'ui.
     return (items) => items.slice().reverse();
 })
 
+.config(($ionicConfigProvider) => {
+    $ionicConfigProvider.views.transition('none');
+})
+
 .config(($stateProvider, $urlRouterProvider) => {
     $stateProvider
         .state('ip', {
-            url: "/ip",
-            templateUrl: "templates/skynet-ip.html"
+            url: '/ip',
+            templateUrl: 'templates/skynet-ip.html'
         })
         .state('home', {
-            url: "/home",
-            templateUrl: "templates/skynet-home.html"
+            url: '/home',
+            templateUrl: 'templates/skynet-home.html'
+        })
+        .state('move', {
+            url: '/move',
+            templateUrl: 'templates/skynet-move.html'
         });
     $urlRouterProvider.otherwise('/ip');
 });

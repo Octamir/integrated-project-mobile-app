@@ -1,7 +1,9 @@
 <ion-view>
   <!-- If ion-content is declared outside of the view, the iOS version breaks -->
   <ion-content ng-controller="HomeController">
-    <span>{{ip}}</span>
+    <!-- <span>{{ip}}</span> -->
+    <div ng-include="'templates/information-bar.html'"></div>
+
     <table style="width:90%;">
       <tr>
         <td>Action</td>
@@ -39,14 +41,6 @@
         <td class="vertically-aligned">LyingBack</td>
         <td><button class="ion-play button button-positive button-small" ng-click="robot.lieBack()"></button></td>
       </tr>
-    </table>
-    <table ng-show="robot.move">
-      <tr><td>Move</td></tr>
-      <tr><td><input class="item" type="number" min="0" ng-model="x" placeholder="X"></td></tr>
-      <tr><td><input class="item" type="number" min="0" ng-model="y" placeholder="Y"></td></tr>
-      <tr><td><input class="item" type="number" min="0" ng-model="d" placeholder="D"></td></tr>
-      <tr><td><button class="ion-play button button-block button-positive" ng-click="robot.move(x,y,d)"></button></td></tr>
-
     </table>
   </ion-content>
 </ion-view>
