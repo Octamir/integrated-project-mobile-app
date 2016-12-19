@@ -47,6 +47,10 @@ table tr:nth-child(even) {
   background-color: #ffffff;
 }
 
+.no-margin {
+  margin: 0 !important;
+}
+
 .vertically-aligned {
   vertical-align:middle
 }
