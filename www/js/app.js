@@ -46,6 +46,10 @@ angular.module('skynet', ['ionic', 'skynet.controllers', 'skynet.services', 'ui.
         .state('move', {
             url: '/move',
             templateUrl: 'templates/skynet-move.html'
-        });
+        })
+      .state('live', {
+        url: '/live',
+        templateUrl: 'templates/skynet-live.html'
+      });
     $urlRouterProvider.otherwise('/ip');
 });

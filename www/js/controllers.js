@@ -86,4 +86,8 @@ angular.module('skynet.controllers', [])
 
 .controller('MoveController', ($scope) => {
 
+})
+
+.controller('LiveController', ($scope) => {
+
 });
