@@ -34,6 +34,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   background-color: $positive;
 }
 
+/*
 table, th , td  {
   border: 1px solid grey;
   border-collapse: collapse;
@@ -46,11 +47,66 @@ table tr:nth-child(odd) {
 table tr:nth-child(even) {
   background-color: #ffffff;
 }
+*/
 
 .no-margin {
   margin: 0 !important;
 }
 
+/* http://codepen.io/mhartington/pen/gcHeL */
 .vertically-aligned {
-  vertical-align:middle
+  /*vertical-align:middle*/
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-content: stretch;
+  -ms-flex-line-pack: stretch;
+  align-content: stretch;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.col-text {
+  @extend .col-33
+}
+
+.col-button {
+  @extend .col-66
+}
+
+.alternating-table .table-heading {
+  color: $positive;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.alternating-table .col {
+  border: 1px solid lightgray;
+}
+
+.alternating-table .row:nth-child(even) {
+  background-color: #f1f1f1;
+}
+.alternating-table .row:nth-child(odd) {
+  background-color: #ffffff;
 }
