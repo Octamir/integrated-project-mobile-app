@@ -10,23 +10,8 @@
     </ion-side-menu-content>
 
     <ion-side-menu side="left" ng-controller="SideMenuController">
-        <!--
-        <a menu-close href="#/home" class="item">Home</a>
-        <a menu-close href="#/home" class="item">Home</a>
-        <a menu-close href="#/home" class="item">Home</a>
-        -->
-
-
-
-        <div menu-close ng-click="goTo('home')" class="item">Home</div>
-        <div menu-close ng-click="goTo('move')" class="item">Move</div>
+        <div menu-close ng-click="goTo('actions')" class="item">Actions</div>
+        <div menu-close ng-click="goTo('move')" ng-show="robot.move" class="item">Move</div>
         <div menu-close ng-click="signOut()" class="item">Sign out</div>
-
-
-      <!--
-      <div menu-close class="item"><a href="#/home">Home</a></div>
-      <div menu-close class="item"><a href="#/move">Move</a></div>
-      <div menu-close class="item">Sign out</div>
-      -->
     </ion-side-menu>
 </ion-side-menus>

@@ -4,6 +4,8 @@ angular.module('skynet.controllers', [])
     // Simple function to enable side menu items to change the current state
     $scope.goTo = (state) => {
         $state.go(state);
+        console.log($state.current.name);
+      $scope.titleBar = $state.current.name;
     };
 
     $scope.signOut = () => {
@@ -58,7 +60,7 @@ angular.module('skynet.controllers', [])
 
             if (gotGoodType) {
                 SkynetService.addCurrentIpAsPrevious();
-                $state.go('home');
+                $state.go('actions');
             }
         }, () => {
             SkynetService.showCannotConnectError();
@@ -78,7 +80,7 @@ angular.module('skynet.controllers', [])
     };
 })
 
-.controller('HomeController', ($scope, SkynetService, RobotService) => {
+.controller('ActionsController', ($scope) => {
 
 })
 

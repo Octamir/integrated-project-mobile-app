@@ -1,14 +1,22 @@
-<ion-view>
+<ion-view title="Move!!!! CHAAAAAARGE">
   <!-- If ion-content is declared outside of the view, the iOS version breaks -->
   <ion-content ng-controller="MoveController">
     <div ng-include="'templates/information-bar.html'"></div>
 
-    <table ng-show="robot.move">
-      <tr><td>Move</td></tr>
-      <tr><td><input class="item" type="number" min="0" ng-model="x" placeholder="X"></td></tr>
-      <tr><td><input class="item" type="number" min="0" ng-model="y" placeholder="Y"></td></tr>
-      <tr><td><input class="item" type="number" min="0" ng-model="d" placeholder="D"></td></tr>
-      <tr><td><button class="ion-play button button-block button-positive" ng-click="robot.move(x,y,d)"></button></td></tr>
-    </table>
+    <label class="item item-input">
+      <input type="number" ng-model="x" placeholder="X" required/>
+    </label>
+
+    <label class="item item-input">
+      <input type="number" ng-model="y" placeholder="Y" required/>
+    </label>
+
+    <label class="item item-input">
+      <input type="number" ng-model="d" placeholder="D" required/>
+    </label>
+
+     <div class="padded-button-wrapper">
+       <button class="ion-play button button-block button-positive" ng-click="robot.move(x,y,d)"></button>
+     </div>
   </ion-content>
 </ion-view>

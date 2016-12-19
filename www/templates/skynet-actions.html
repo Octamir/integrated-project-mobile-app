@@ -1,49 +1,7 @@
 <ion-view>
   <!-- If ion-content is declared outside of the view, the iOS version breaks -->
-  <ion-content ng-controller="HomeController">
-    <!-- <span>{{ip}}</span> -->
+  <ion-content ng-controller="ActionsController">
     <div ng-include="'templates/information-bar.html'"></div>
-
-    <!--
-    <table style="width:90%;">
-      <tr>
-        <td>Action</td>
-        <td>Start</td>
-      </tr>
-      <tr ng-show="robot.stand">
-        <td class="vertically-aligned">Stand</td>
-        <td><button class="ion-play button button-positive button-small button-block no-margin" ng-click="robot.stand()"></button></td>
-      </tr>
-      <tr ng-show="robot.standInit">
-        <td class="vertically-aligned">StandInit</td>
-        <td><button class="ion-play button button-positive button-small button-block no-margin" ng-click="robot.standInit()"></button></td>
-      </tr>
-      <tr ng-show="robot.standZero">
-        <td class="vertically-aligned">StandZero</td>
-        <td><button class="ion-play button button-positive button-small button-block no-margin" ng-click="robot.standZero()"></button></td>
-      </tr>
-      <tr ng-show="robot.sit">
-        <td class="vertically-aligned">Sit</td>
-        <td><button class="ion-play button button-positive button-small button-block no-margin" ng-click="robot.sit()"></button></td>
-      </tr>
-      <tr ng-show="robot.sitRelax">
-        <td class="vertically-aligned">SitRelax</td>
-        <td><button class="ion-play button button-positive button-small button-block no-margin" ng-click="robot.sitRelax()"></button></td>
-      </tr>
-      <tr ng-show="robot.crouch">
-        <td class="vertically-aligned">Crouch</td>
-        <td><button class="ion-play button button-positive button-small button-block no-margin" ng-click="robot.crouch()"></button></td>
-      </tr>
-      <tr ng-show="robot.lieBelly">
-        <td class="vertically-aligned">LyingBelly</td>
-        <td><button class="ion-play button button-positive button-small button-block no-margin" ng-click="robot.lieBelly()"></button></td>
-      </tr>
-      <tr ng-show="robot.lieBack">
-        <td class="vertically-aligned">LyingBack</td>
-        <td><button class="ion-play button button-positive button-small button-block no-margin" ng-click="robot.lieBack()"></button></td>
-      </tr>
-    </table>
-    -->
 
     <div class="alternating-table">
       <div class="row" >

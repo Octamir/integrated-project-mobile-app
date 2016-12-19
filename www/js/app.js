@@ -39,9 +39,9 @@ angular.module('skynet', ['ionic', 'skynet.controllers', 'skynet.services', 'ui.
             url: '/ip',
             templateUrl: 'templates/skynet-ip.html'
         })
-        .state('home', {
-            url: '/home',
-            templateUrl: 'templates/skynet-home.html'
+        .state('actions', {
+            url: '/actions',
+            templateUrl: 'templates/skynet-actions.html'
         })
         .state('move', {
             url: '/move',
