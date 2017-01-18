@@ -37,19 +37,23 @@ angular.module('skynet', ['ionic', 'skynet.controllers', 'skynet.services', 'ui.
     $stateProvider
         .state('ip', {
             url: '/ip',
-            templateUrl: 'templates/skynet-ip.html'
+            templateUrl: 'templates/skynet-ip.html',
+            controller: 'IPController'
         })
         .state('actions', {
             url: '/actions',
-            templateUrl: 'templates/skynet-actions.html'
+            templateUrl: 'templates/skynet-actions.html',
+            controller: 'ActionsController'
         })
         .state('move', {
             url: '/move',
-            templateUrl: 'templates/skynet-move.html'
+            templateUrl: 'templates/skynet-move.html',
+            controller: 'MoveController'
         })
-      .state('live', {
-        url: '/live',
-        templateUrl: 'templates/skynet-live.html'
-      });
+        .state('live', {
+            url: '/live',
+            templateUrl: 'templates/skynet-live.html',
+            controller: 'LiveController'
+        });
     $urlRouterProvider.otherwise('/ip');
 });

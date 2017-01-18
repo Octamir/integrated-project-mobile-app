@@ -5,7 +5,7 @@ angular.module('skynet.controllers', [])
     $scope.goTo = (state) => {
         $state.go(state);
         console.log($state.current.name);
-      $scope.titleBar = $state.current.name;
+        $scope.titleBar = $state.current.name;
     };
 
     $scope.signOut = () => {
@@ -88,6 +88,18 @@ angular.module('skynet.controllers', [])
 
 })
 
-.controller('LiveController', ($scope) => {
-
+.controller('LiveController', ($scope, SkynetService) => {
+    $scope.currentFrameBase64 = '';
+    let shouldLoadImage = true;
+    const getCurrentFrame = () => {
+        if (shouldLoadImage) {
+            SkynetService.createAjaxCallWithoutLoadingScreen('get-picture', (data) => {
+                console.log(data);
+                $scope.currentFrameBase64 = data.data.image;
+                setTimeout(getCurrentFrame, 1000); // Let it rest for a little bit so the memory won't overflow and stuff
+            }, () => console.log('error error error'));
+        }
+    };
+    getCurrentFrame();
+    $scope.$on('$destroy', () => shouldLoadImage = false);
 });

@@ -116,6 +116,16 @@ angular.module('skynet.services', [])
         }
     };
 
+    const _createAjaxCallWithoutLoadingScreen = (route, success, error) => {
+        const fullAddress = _getFullRobotAddress();
+        console.log(fullAddress);
+        if (fullAddress) {
+            $http.get(_webserviceIP + fullAddress + '/' + route).then(success, error);
+        } else {
+            error();
+        }
+    };
+
     const _showCannotConnectError = () => {
         $ionicPopup.alert({
             title: 'Error',
@@ -144,6 +154,7 @@ angular.module('skynet.services', [])
         clearAll: _clearAll,
 
         createAjaxCall: _createAjaxCall,
+        createAjaxCallWithoutLoadingScreen: _createAjaxCallWithoutLoadingScreen,
 
         showCannotConnectError: _showCannotConnectError
     }
