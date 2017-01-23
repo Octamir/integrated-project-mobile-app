@@ -3,6 +3,8 @@
   <ion-content>
     <div ng-include="'templates/information-bar.html'"></div>
 
-    <img data-ng-src="data:image/png;base64,{{ currentFrameBase64 }}" />
+    <div class="feed-container">
+      <img data-ng-src="data:image/png;base64,{{ currentFrameBase64 }}" />
+    </div>
   </ion-content>
 </ion-view>

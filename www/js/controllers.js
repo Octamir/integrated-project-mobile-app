@@ -4,7 +4,6 @@ angular.module('skynet.controllers', [])
     // Simple function to enable side menu items to change the current state
     $scope.goTo = (state) => {
         $state.go(state);
-        console.log($state.current.name);
         $scope.titleBar = $state.current.name;
     };
 
@@ -25,6 +24,9 @@ angular.module('skynet.controllers', [])
     if (SkynetService.isIpStillValid()) {
         $scope.ip = SkynetService.getIp();
         $scope.port = SkynetService.getPort();
+    } else {
+      // The RAL is a Flask service, which defaults to port 5000
+      $scope.port = 5000;
     }
 
     const setConnectionData = (ip, port) => {
@@ -85,21 +87,20 @@ angular.module('skynet.controllers', [])
 })
 
 .controller('MoveController', ($scope) => {
-
+  $scope.x = 0;
+  $scope.y = 0;
+  $scope.d = 0;
 })
 
-.controller('LiveController', ($scope, SkynetService) => {
+.controller('LiveController', ($scope, $rootScope, SkynetService) => {
     $scope.currentFrameBase64 = '';
-    let shouldLoadImage = true;
     const getCurrentFrame = () => {
-        if (shouldLoadImage) {
+        if ($rootScope.shouldLoadLiveFeed) {
             SkynetService.createAjaxCallWithoutLoadingScreen('get-picture', (data) => {
-                console.log(data);
                 $scope.currentFrameBase64 = data.data.image;
                 setTimeout(getCurrentFrame, 1000); // Let it rest for a little bit so the memory won't overflow and stuff
             }, () => console.log('error error error'));
         }
     };
     getCurrentFrame();
-    $scope.$on('$destroy', () => shouldLoadImage = false);
 });

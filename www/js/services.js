@@ -76,8 +76,8 @@ angular.module('skynet.services', [])
     // If the IP and port were set more than 2 hours ago we will return null, which means it has to be set again
     const _getFullRobotAddress = () => {
         if (_getLastSetAt()) {
-            var lastSetAtMoment = moment(_getLastSetAt(), _getDateTimeFormat());
-            var hoursSinceLastSet = moment.duration(moment().diff(lastSetAtMoment)).asHours();
+            const lastSetAtMoment = moment(_getLastSetAt(), _getDateTimeFormat());
+            const hoursSinceLastSet = moment.duration(moment().diff(lastSetAtMoment)).asHours();
 
             if (hoursSinceLastSet <= 2) {
                 return _getIp() + ':' + _getPort();
@@ -169,8 +169,12 @@ angular.module('skynet.services', [])
             this.name = '';
             this.batteryLevel = 0;
 
-            this.getName();
-            this.getBatteryLevel();
+            this.refreshData();
+        }
+
+        refreshData() {
+          this.getName();
+          this.getBatteryLevel();
         }
 
         getIp() {
@@ -185,7 +189,7 @@ angular.module('skynet.services', [])
 
         getBatteryLevel() {
             SkynetService.createAjaxCall('get-battery', (data) => {
-                this.batteryLevel = data.data.level;
+                this.batteryLevel = data.data.batteryLevel;
             }, () => console.log('Error, could not get name'))
         }
     }

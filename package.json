@@ -1,7 +1,7 @@
 {
-  "name": "ionic-project",
+  "name": "integrated-project-mobile-app",
   "version": "1.1.1",
-  "description": "An Ionic project",
+  "description": "Integrated project for Mobile Development",
   "scripts": {
     "start": "concurrently \"npm run gulp\" \"npm run serve\"",
     "postinstall": "bower install",

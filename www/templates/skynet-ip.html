@@ -7,14 +7,15 @@
     <form name="ipForm" ng-submit="connectFromForm()" ng-show="showForm" novalidate>
       <div class="list">
         <label class="item item-input">
-          <input type="text" ng-model="ip" ng-pattern="ipRegex" placeholder="IP" required/>
+          <span class="input-label">IP</span>
+          <input type="text" ng-model="ip" ng-pattern="ipRegex" required/>
         </label>
         <label class="item item-input">
-          <input type="number" ng-model="port" placeholder="Port" required>
+          <span class="input-label">Port</span>
+          <input type="number" ng-model="port" required>
         </label>
       </div>
 
-      <!-- Quick 'n dirty css trick -->
       <div class="padded-button-wrapper">
         <!-- You should not be able to procede without inputting valid information -->
         <button type="submit" ng-disabled="ipForm.$invalid" class="button button-block button-positive">Continue</button>
@@ -23,8 +24,10 @@
 
     <div ng-hide="previousIps.length == 0">
       <h3 class="title-positive text-center">Previous IPs</h3>
-      <div class="list">
-        <div class="item" ng-repeat="ip in previousIps | reverse track by $index" ng-click="connectFromList(ip)">{{ ip }}</div>
+      <div class="list ip-list">
+        <div class="item" ng-repeat="ip in previousIps | reverse track by $index" ng-click="connectFromList(ip)">
+          {{ ip }}
+        </div>
       </div>
     </div>
   </ion-content>

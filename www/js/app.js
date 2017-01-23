@@ -21,6 +21,7 @@ angular.module('skynet', ['ionic', 'skynet.controllers', 'skynet.services', 'ui.
 
     $rootScope.$on('$stateChangeSuccess', () => {
         $rootScope.showMenu = $location.path() !== '/ip';
+        $rootScope.shouldLoadLiveFeed = $location.path() == '/live'; // The live feed must only load while on the live screen
     });
 })
 
