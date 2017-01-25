@@ -72,14 +72,6 @@ $skynet-color-gray: #c4c4c4;
   align-items: center;
 }
 
-.col-text {
-  @extend .col-33
-}
-
-.col-button {
-  @extend .col-66
-}
-
 .alternating-table {
   .table-heading {
     color: $positive;
@@ -89,6 +81,18 @@ $skynet-color-gray: #c4c4c4;
 
   .col {
     border: 1px solid $skynet-color-gray;
+  }
+
+  .col-title {
+    @extend .col-100
+  }
+
+  .col-text {
+    @extend .col-33
+  }
+
+  .col-button {
+    @extend .col-66
   }
 
   .row:nth-child(even) {

@@ -7,7 +7,10 @@ angular.module('skynet.services', [])
         ip: null,
         port: null,
         lastSetAt: null,
-        previousIps: []
+        previousIps: [],
+        settings: {
+            groupActionsByType: false
+        }
     });
 
     const _getIp = () => {
@@ -26,12 +29,17 @@ angular.module('skynet.services', [])
         return $localStorage.previousIps;
     };
 
+    const _getSettings = () => {
+        return $localStorage.settings;
+    };
+
     const _getAll = () => {
         return {
             ip: _getIp(),
             port: _getPort(),
             lastSetAt: _getLastSetAt(),
-            previousIps: _getPreviousIps()
+            previousIps: _getPreviousIps(),
+            settings: _getSettings()
         }
     };
 
@@ -142,6 +150,7 @@ angular.module('skynet.services', [])
         getPort: _getPort,
         getLastSetAt: _getLastSetAt,
         getPreviousIps: _getPreviousIps,
+        getSettings: _getSettings,
         getAll: _getAll,
 
         setIp: _setIp,

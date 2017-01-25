@@ -25,8 +25,8 @@ angular.module('skynet.controllers', [])
         $scope.ip = SkynetService.getIp();
         $scope.port = SkynetService.getPort();
     } else {
-      // The RAL is a Flask service, which defaults to port 5000
-      $scope.port = 5000;
+        // The RAL is a Flask service, which defaults to port 5000
+        $scope.port = 5000;
     }
 
     const setConnectionData = (ip, port) => {
@@ -82,7 +82,26 @@ angular.module('skynet.controllers', [])
     };
 })
 
-.controller('ActionsController', ($scope, SkynetService) => {
+.controller('ActionsController', ($scope, $rootScope, SkynetService) => {
+    // Init for safety
+    $scope.groupedActions = {};
+
+    const changeActionsGrouping = (grouped) => {
+        if (grouped) {
+            // Group by type using Lodash
+            $scope.groupedActions = _.groupBy($rootScope.robot.actions, 'type');
+        } else {
+            // Make one big empty (as in the name) type
+            $scope.groupedActions = {
+                '': $rootScope.robot.actions
+            };
+        }
+    };
+    changeActionsGrouping($rootScope.settings.groupActionsByType);
+
+    // Listen for a change in this setting, to change the way actions are displayed accordingly
+    $rootScope.$watch('settings.groupActionsByType', changeActionsGrouping);
+
     $scope.doAction = (route) => {
         SkynetService.createAjaxCall(
             route,
@@ -109,4 +128,8 @@ angular.module('skynet.controllers', [])
         }
     };
     getCurrentFrame();
+})
+
+.controller('SettingsController', ($scope) => {
+
 });

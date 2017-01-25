@@ -16,8 +16,11 @@ angular.module('skynet', ['ionic', 'skynet.controllers', 'skynet.services', 'ui.
     });
 })
 
-.run(($rootScope, $location) => {
+.run(($rootScope, $location, SkynetService) => {
     $rootScope.showLoading = false;
+
+    // By doing this the settings shall be automatically saved whenever they are changed
+    $rootScope.settings = SkynetService.getSettings();
 
     $rootScope.$on('$stateChangeSuccess', () => {
         $rootScope.showMenu = $location.path() !== '/ip';
@@ -28,6 +31,13 @@ angular.module('skynet', ['ionic', 'skynet.controllers', 'skynet.services', 'ui.
 //http://stackoverflow.com/questions/15266671/angular-ng-repeat-in-reverse
 .filter('reverse', function() {
     return (items) => items.slice().reverse();
+})
+
+  // http://stackoverflow.com/questions/30207272/capitalize-the-first-letter-of-string-in-angularjs
+.filter('capitalize', function() {
+  return function(input) {
+    return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
+  }
 })
 
 .config(($ionicConfigProvider) => {
@@ -51,6 +61,10 @@ angular.module('skynet', ['ionic', 'skynet.controllers', 'skynet.services', 'ui.
         .state('live', {
             url: '/live',
             templateUrl: 'templates/skynet-live.html'
+        })
+        .state('settings', {
+            url: '/settings',
+            templateUrl: 'templates/skynet-settings.html'
         });
     $urlRouterProvider.otherwise('/ip');
 });

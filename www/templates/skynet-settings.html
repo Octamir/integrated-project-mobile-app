@@ -1,0 +1,10 @@
+<ion-view>
+  <!-- If ion-content is declared outside of the view, the iOS version breaks -->
+  <ion-content ng-controller="SettingsController">
+    <div ng-include="'templates/information-bar.html'"></div>
+
+    <div class="list">
+      <ion-checkbox ng-model="settings.groupActionsByType" ng-checked="settings.groupActionsByType">Group actions by type</ion-checkbox>
+    </div>
+  </ion-content>
+</ion-view>
