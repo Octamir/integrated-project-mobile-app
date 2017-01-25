@@ -126,11 +126,15 @@ angular.module('skynet.services', [])
         }
     };
 
-    const _showCannotConnectError = () => {
+    const _showError = (title, body) => {
         $ionicPopup.alert({
-            title: 'Error',
-            template: 'Could not connect'
+            title: title,
+            template: body
         });
+    };
+
+    const _showCannotConnectError = () => {
+        _showError('Error', 'Could not connect');
     };
 
     return {
@@ -156,6 +160,7 @@ angular.module('skynet.services', [])
         createAjaxCall: _createAjaxCall,
         createAjaxCallWithoutLoadingScreen: _createAjaxCallWithoutLoadingScreen,
 
+        showError: _showError,
         showCannotConnectError: _showCannotConnectError
     }
 })
@@ -168,13 +173,15 @@ angular.module('skynet.services', [])
 
             this.name = '';
             this.batteryLevel = 0;
+            this.actions = [];
 
+            this.getActions();
+            this.getName();
             this.refreshData();
         }
 
         refreshData() {
-          this.getName();
-          this.getBatteryLevel();
+            this.getBatteryLevel();
         }
 
         getIp() {
@@ -182,15 +189,22 @@ angular.module('skynet.services', [])
         }
 
         getName() {
-            SkynetService.createAjaxCall('get-name', (data) => {
+            SkynetService.createAjaxCallWithoutLoadingScreen('get-name', (data) => {
                 this.name = data.data.name;
             }, () => console.log('Error, could not get name'))
         }
 
         getBatteryLevel() {
-            SkynetService.createAjaxCall('get-battery', (data) => {
+            SkynetService.createAjaxCallWithoutLoadingScreen('get-battery', (data) => {
                 this.batteryLevel = data.data.batteryLevel;
-            }, () => console.log('Error, could not get name'))
+            }, () => console.log('Error, could not get battery level'))
+        }
+
+        getActions() {
+            SkynetService.createAjaxCall('get-actions', (data) => {
+                console.log(data);
+                this.actions = data.data;
+            }, () => console.log('Error, could not get actions'))
         }
     }
 
@@ -211,37 +225,7 @@ angular.module('skynet.services', [])
             super();
 
             this.canWalk = true;
-            this.canSit = true;
-            this.canStand = true;
-            this.canLie = true;
-            this.canCrouch = true;
         }
-
-        stand() {
-            SkynetService.createAjaxCall("actions/stand", () => console.log("succes"), () => console.log("error"));
-        }
-        standZero() {
-            SkynetService.createAjaxCall("actions/stand-zero", () => console.log("succes"), () => console.log("error"));
-        }
-        standInit() {
-            SkynetService.createAjaxCall("actions/stand-init", () => console.log("succes"), () => console.log("error"));
-        }
-        sit() {
-            SkynetService.createAjaxCall("actions/sit", () => console.log("succes"), () => console.log("error"));
-        }
-        sitRelax() {
-            SkynetService.createAjaxCall("actions/sit-relax", () => console.log("succes"), () => console.log("error"));
-        }
-        crouch() {
-            SkynetService.createAjaxCall("actions/crouch", () => console.log("succes"), () => console.log("error"));
-        }
-        lieBelly() {
-            SkynetService.createAjaxCall("actions/lying-belly", () => console.log("succes"), () => console.log("error"));
-        }
-        lieBack() {
-            SkynetService.createAjaxCall("actions/lying-back", () => console.log("succes"), () => console.log("error"));
-        }
-
     }
 
     class Pepper extends MoveableRobot {

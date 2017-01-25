@@ -82,14 +82,20 @@ angular.module('skynet.controllers', [])
     };
 })
 
-.controller('ActionsController', ($scope) => {
-
+.controller('ActionsController', ($scope, SkynetService) => {
+    $scope.doAction = (route) => {
+        SkynetService.createAjaxCall(
+            route,
+            (data) => console.log(data),
+            () => SkynetService.showError('Error', 'Could not execute this action')
+        );
+    };
 })
 
 .controller('MoveController', ($scope) => {
-  $scope.x = 0;
-  $scope.y = 0;
-  $scope.d = 0;
+    $scope.x = 0;
+    $scope.y = 0;
+    $scope.d = 0;
 })
 
 .controller('LiveController', ($scope, $rootScope, SkynetService) => {

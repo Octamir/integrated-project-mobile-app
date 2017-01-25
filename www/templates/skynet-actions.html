@@ -9,37 +9,9 @@
         <div class="col col-button vertically-aligned table-heading">Play</div>
       </div>
 
-      <div class="row" ng-show="robot.stand">
-        <div class="col col-text vertically-aligned">Stand</div>
-        <div class="col col-button"><button class="ion-play button button-positive button-small button-block no-margin" ng-click="robot.stand()"></button></div>
-      </div>
-      <div class="row" ng-show="robot.standInit">
-        <div class="col col-text vertically-aligned">Stand Init</div>
-        <div class="col col-button"><button class="ion-play button button-positive button-small button-block no-margin" ng-click="robot.standInit()"></button></div>
-      </div>
-      <div class="row" ng-show="robot.standZero">
-        <div class="col col-text vertically-aligned">Stand Zero</div>
-        <div class="col col-button"><button class="ion-play button button-positive button-small button-block no-margin" ng-click="robot.standZero()"></button></div>
-      </div>
-      <div class="row" ng-show="robot.sit">
-        <div class="col col-text vertically-aligned">Sit</div>
-        <div class="col col-button"><button class="ion-play button button-positive button-small button-block no-margin" ng-click="robot.sit()"></button></div>
-      </div>
-      <div class="row" ng-show="robot.sitRelax">
-        <div class="col col-text vertically-aligned">Sit Relax</div>
-        <div class="col col-button"><button class="ion-play button button-positive button-small button-block no-margin" ng-click="robot.sitRelax()"></button></div>
-      </div>
-      <div class="row" ng-show="robot.crouch">
-        <div class="col col-text vertically-aligned">Crouch</div>
-        <div class="col col-button"><button class="ion-play button button-positive button-small button-block no-margin" ng-click="robot.crouch()"></button></div>
-      </div>
-      <div class="row" ng-show="robot.lieBelly">
-        <div class="col col-text vertically-aligned">Lie on belly</div>
-        <div class="col col-button"><button class="ion-play button button-positive button-small button-block no-margin" ng-click="robot.lieBelly()"></button></div>
-      </div>
-      <div class="row" ng-show="robot.lieBack">
-        <div class="col col-text vertically-aligned">Lie on back</div>
-        <div class="col col-button"><button class="ion-play button button-positive button-small button-block no-margin" ng-click="robot.lieBack()"></button></div>
+      <div class="row" ng-repeat="action in robot.actions">
+        <div class="col col-text vertically-aligned">{{ action.displayName }}</div>
+        <div class="col col-button"><button class="ion-play button button-positive button-small button-block no-margin" ng-click="doAction(action.route)"></button></div>
       </div>
     </div>
   </ion-content>
