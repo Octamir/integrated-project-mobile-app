@@ -131,9 +131,16 @@ angular.module('skynet.controllers', [])
 })
 
 .controller('SpeakController', ($scope, SkynetService) => {
-  $scope.text = "";
+    $scope.text = "";
 })
 
 .controller('SettingsController', ($scope) => {
 
+})
+
+.controller('GuessAgeController', ($scope) => {
+    // Mock data
+    $scope.age = Math.floor((Math.random() * (75 - 65)) + 65);
+    $scope.gender = 'male';
+    $scope.mood = 'presidential';
 });

@@ -23,6 +23,11 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 $skynet-color-light-gray: #f1f1f1;
 $skynet-color-gray: #c4c4c4;
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 .information-bar {
   background-color: $skynet-color-gray;
 }
@@ -87,11 +92,11 @@ $skynet-color-gray: #c4c4c4;
     /*@extend .col-100*/
   }
 
-  .col-text {
+  .col-description {
     @extend .col-33
   }
 
-  .col-button {
+  .col-content {
     @extend .col-66
   }
 

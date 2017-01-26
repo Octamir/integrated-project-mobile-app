@@ -1,0 +1,22 @@
+<ion-view>
+  <!-- If ion-content is declared outside of the view, the iOS version breaks -->
+  <ion-content ng-controller="GuessAgeController">
+    <div ng-include="'templates/information-bar.html'"></div>
+
+    <img src="https://lh5.googleusercontent.com/-Sv0q6lkSAGM/AAAAAAAAAAI/AAAAAAAAAY4/AMTATfeqra8/s0-c-k-no-ns/photo.jpg">
+    <div class="alternating-table">
+      <div class="row">
+        <div class="col col-description">Age</div>
+        <div class="col col-content">{{ age }}</div>
+      </div>
+      <div class="row">
+        <div class="col col-description">Gender</div>
+        <div class="col col-content">{{ gender }}</div>
+      </div>
+      <div class="row">
+        <div class="col col-description">Mood</div>
+        <div class="col col-content">{{ mood }}</div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

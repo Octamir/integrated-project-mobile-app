@@ -14,8 +14,8 @@
       </div>
 
       <div class="row" ng-repeat="action in actions">
-        <div class="col col-text vertically-aligned">{{ action.displayName }}</div>
-        <div class="col col-button"><button class="ion-play button button-positive button-small button-block no-margin" ng-click="doAction(action.route)"></button></div>
+        <div class="col col-description vertically-aligned">{{ action.displayName }}</div>
+        <div class="col col-content"><button class="ion-play button button-positive button-small button-block no-margin" ng-click="doAction(action.route)"></button></div>
       </div>
     </div>
   </ion-content>
