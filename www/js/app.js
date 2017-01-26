@@ -62,6 +62,10 @@ angular.module('skynet', ['ionic', 'skynet.controllers', 'skynet.services', 'ui.
             url: '/live',
             templateUrl: 'templates/skynet-live.html'
         })
+      .state('speak', {
+        url: '/speak',
+        templateUrl: 'templates/skynet-speak.html'
+      })
         .state('settings', {
             url: '/settings',
             templateUrl: 'templates/skynet-settings.html'

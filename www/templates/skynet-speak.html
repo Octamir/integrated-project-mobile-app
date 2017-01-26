@@ -1,0 +1,19 @@
+<ion-view>
+  <ion-content ng-controller="SpeakController">
+    <div ng-include="'templates/information-bar.html'"></div>
+
+    <!--<label class="item item-input">
+      <textarea ng-model="talk"  placeholder="bla" required></textarea>
+    </label>-->
+    <label class="item item-input">
+      <span class="input-label">Text</span>
+      <input type="text" ng-model="text" required/>
+    </label>
+
+    <div class="padded-button-wrapper">
+      <button class="ion-play button button-block button-positive" ng-click="robot.speak(text)"></button>
+    </div>
+
+  </ion-content>
+
+</ion-view>

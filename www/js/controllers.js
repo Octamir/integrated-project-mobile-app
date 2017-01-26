@@ -130,6 +130,10 @@ angular.module('skynet.controllers', [])
     getCurrentFrame();
 })
 
+.controller('SpeakController', ($scope, SkynetService) => {
+  $scope.text = "";
+})
+
 .controller('SettingsController', ($scope) => {
 
 });

@@ -215,6 +215,9 @@ angular.module('skynet.services', [])
                 this.actions = data.data;
             }, () => console.log('Error, could not get actions'))
         }
+        speak(text) {
+          SkynetService.createAjaxCall(`ask/${text}`, () => console.log("succes"), () => console.log("error"));
+        }
     }
 
     class MoveableRobot extends Robot {
