@@ -100,6 +100,10 @@ img {
     @extend .col-66
   }
 
+  .row {
+    background-clip: content-box;
+  }
+
   .row:nth-child(even) {
     background-color: $skynet-color-light-gray;
   }
